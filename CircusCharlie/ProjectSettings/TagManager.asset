@@ -53,6 +53,9 @@ TagManager:
   - name: Foreground
     uniqueID: 4088709437
     locked: 0
+  - name: MeterSign
+    uniqueID: 888771527
+    locked: 0
   - name: Player
     uniqueID: 2954813999
     locked: 0

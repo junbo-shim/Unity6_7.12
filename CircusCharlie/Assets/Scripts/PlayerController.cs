@@ -7,61 +7,119 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRigid;
     private Animator playerAnimator;
 
+    public float maxMoveSpeed = 5f;
+    public float jumpForce = 7.5f;
 
-    public float forwardForce = 300f;
-    public float backwardForce = 300f;
-    public float jumpForce = 400f;
+    public bool isDead = true;
 
-
-    private int jumpCount = 0;
-    private bool isGround = true;
-    private bool isNothing = true;
-    private bool isForward = false;
-    private bool isBackward = false;
-    private bool isJump = false;
-    private bool isDead = false;
-
-
+    void Awake()
+    {
+        playerRigid = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRigid = GetComponent<Rigidbody2D>();
-        playerAnimator = GetComponent<Animator>();
 
-        Debug.Assert(playerRigid != null);
-        Debug.Assert(playerAnimator != null);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isDead) { return; }
-
-        playerAnimator.SetBool("OnGround", isGround);
-        playerAnimator.SetBool("PressedNothing", isNothing);
-        playerAnimator.SetBool("PressedRight", isForward);
-        playerAnimator.SetBool("PressedLeft", isBackward);
-        playerAnimator.SetBool("PressedJump", isJump);
+        if (Input.GetButtonDown("Jump") && playerAnimator.GetBool("IsJumping") == false)
+        {
+            Jump();
+        }
+        StopHorizon();
+        CheckAnimationState();
     }
 
-    private void GoForward() 
+    void FixedUpdate()
     {
-    
+        if (playerAnimator.GetBool("IsJumping") == false)
+        {
+            MoveHorizon();
+        }
     }
-    private void GoBackward() 
+
+    private void Jump() 
     {
-    
+        playerRigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        playerAnimator.SetBool("IsJumping", true);
     }
-    private void DoJump() 
+
+    private void MoveHorizon() 
     {
-    
+        //if (playerAnimator.GetBool("IsJumping") == true) 
+        //{
+        //    return;
+        //}
+        //else if (playerAnimator.GetBool("IsJumping") == false) 
+        //{
+            float horizonMove = Input.GetAxisRaw("Horizontal");
+
+            playerRigid.AddForce(Vector2.right * horizonMove, ForceMode2D.Impulse);
+
+            if (playerRigid.velocity.x > maxMoveSpeed)
+            {
+                playerRigid.velocity = new Vector2(maxMoveSpeed, playerRigid.velocity.y);
+            }
+            else if (playerRigid.velocity.x < maxMoveSpeed *(-1))
+            {
+                playerRigid.velocity = new Vector2(maxMoveSpeed *(-1), playerRigid.velocity.y);
+            }
+        //}
     }
-    private void Die() 
+
+    private void StopHorizon()
+    {
+        if (Input.GetButtonUp("Horizontal"))
+        {
+            playerRigid.velocity = new Vector2(0, playerRigid.velocity.y);
+        }
+        //if (Input.GetButtonUp("Horizontal"))
+        //{
+        //    playerRigid.velocity = new Vector2(playerRigid.velocity.normalized.x * 0.01f, playerRigid.velocity.y);
+        //}
+    }
+
+    private void CheckAnimationState() 
+    {
+        if (Mathf.Abs(playerRigid.velocity.x) < 0.1f)
+        {
+            playerAnimator.SetBool("IsForward", false);
+            playerAnimator.SetBool("IsBackward", false);
+        }
+        else if (playerRigid.velocity.x >= 0.1f)
+        {
+            playerAnimator.SetBool("IsForward", true);
+            playerAnimator.SetBool("IsBackward", false);
+        }
+        else if (playerRigid.velocity.x <= -0.1f)
+        {
+            playerAnimator.SetBool("IsForward", false);
+            playerAnimator.SetBool("IsBackward", true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         playerAnimator.SetTrigger("Die");
-        playerRigid.velocity = Vector2.zero;
         isDead = true;
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Middleground") 
+        {
+            playerAnimator.SetBool("IsJumping", false);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Middleground")
+        {
+            playerAnimator.SetBool("IsJumping", true);
+        }
+    }
 }

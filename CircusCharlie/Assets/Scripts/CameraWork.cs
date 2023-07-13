@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraWork : MonoBehaviour
+{
+    public GameObject followingTarget;
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = new Vector3(followingTarget.transform.position.x, transform.position.y, transform.position.z);
+    }
+}
