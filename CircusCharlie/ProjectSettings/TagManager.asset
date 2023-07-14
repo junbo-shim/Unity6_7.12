@@ -7,6 +7,8 @@ TagManager:
   - Background
   - Middleground
   - Foreground
+  - Dead
+  - Money
   layers:
   - Default
   - TransparentFX
@@ -58,4 +60,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2954813999
+    locked: 0
+  - name: Hoop
+    uniqueID: 2969879465
     locked: 0

@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
 
     public float maxMoveSpeed = 5f;
-    public float jumpForce = 7.5f;
+    public float jumpForce = 9f;
 
-    public bool isDead = true;
+    public bool isDead = false;
 
     void Awake()
     {
@@ -105,8 +105,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerAnimator.SetTrigger("Die");
-        isDead = true;
+        if (collision.tag.Equals("Dead")) 
+        {
+            playerAnimator.SetTrigger("Die");
+            isDead = true;
+        }
+        else if (collision.tag.Equals("Finish"))
+        {
+            playerAnimator.SetTrigger("Win");
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
