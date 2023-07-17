@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Money : MonoBehaviour
+public class ObstaclePoints : MonoBehaviour
 {
-    private SpriteRenderer moneySprite;
-    private CircleCollider2D moneyCollider;
+    private BoxCollider2D obstacleCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        moneySprite = GetComponent<SpriteRenderer>();
-        moneyCollider = GetComponent<CircleCollider2D>();
+        obstacleCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -24,10 +22,9 @@ public class Money : MonoBehaviour
     {
         if (collision.tag.Equals("Player"))
         {
-            Debug.Log("µ¿ÀüÅÍÄ¡");
             Debug.Log("Á¡¼öÈ¹µæ");
-            moneySprite.enabled = false;
-            moneyCollider.enabled = false;
+            obstacleCollider.enabled = false;
         }
     }
+
 }

@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Background
   - Middleground
-  - Foreground
   - Dead
+  - Background
+  - Obstacle
   - Money
   layers:
   - Default
@@ -47,20 +47,23 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 203891021
+    uniqueID: 985817971
     locked: 0
   - name: Middleground
-    uniqueID: 3429978837
+    uniqueID: 3051900679
     locked: 0
   - name: Foreground
-    uniqueID: 4088709437
+    uniqueID: 585450831
     locked: 0
   - name: MeterSign
-    uniqueID: 888771527
+    uniqueID: 2324386741
     locked: 0
   - name: Player
-    uniqueID: 2954813999
+    uniqueID: 440746273
     locked: 0
   - name: Hoop
-    uniqueID: 2969879465
+    uniqueID: 3508697619
+    locked: 0
+  - name: UI
+    uniqueID: 3628907351
     locked: 0

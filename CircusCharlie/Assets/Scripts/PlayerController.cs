@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
     private Rigidbody2D playerRigid;
-    private Animator playerAnimator;
+    public Animator playerAnimator;
 
-    public float maxMoveSpeed = 5f;
-    public float jumpForce = 9f;
+    public float maxMoveSpeed = 4f;
+    public float jumpForce = 7.5f;
 
     public bool isDead = false;
 
@@ -109,11 +111,25 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetTrigger("Die");
             isDead = true;
+
+            Time.timeScale = 0.001f;
+            gameManager.DieOnce();
         }
         else if (collision.tag.Equals("Finish"))
         {
             playerAnimator.SetTrigger("Win");
         }
+        if (collision.tag.Equals("Obstacle")) 
+        {
+            gameManager.stageScore += 100; 
+        }
+        else if (collision.tag.Equals("Money")) 
+        {
+            gameManager.stageScore += 500;
+        }
+
+
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

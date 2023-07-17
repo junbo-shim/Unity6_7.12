@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8524473613053726588}
   - component: {fileID: 2949312403350865373}
   - component: {fileID: 3111461037625635490}
+  - component: {fileID: 7998457002778174630}
   m_Layer: 0
   m_Name: Money
   m_TagString: Money
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -206257859
+  m_SortingLayerID: 585450831
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66655be956ed86a42bc517814a59d2b3, type: 3}
@@ -101,6 +102,18 @@ CircleCollider2D:
   m_Offset: {x: 0.01, y: -0.02}
   serializedVersion: 2
   m_Radius: 0.06
+--- !u!114 &7998457002778174630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018444590495193731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12912b40dfc8e5a47972c217384fda39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2053372446766246012
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2311676193572936304}
-  - component: {fileID: 8495362245098307707}
+  - component: {fileID: 5152290624768169903}
   m_Layer: 0
   m_Name: Money
   m_TagString: Money
@@ -134,7 +147,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8495362245098307707
+--- !u!114 &5152290624768169903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,6 +156,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2053372446766246012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12912b40dfc8e5a47972c217384fda39, type: 3}
+  m_Script: {fileID: 11500000, guid: b5a51bbde44660b4fac3aa0962e76840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
